@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+	<title>Chegg Salary Calculator</title>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-warning">
+  		<a class="navbar-brand m-2 text-light" href="#">
+  			<h3>Chegg Salary Calculator</h3>
+  		</a>
+  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    		<span class="navbar-toggler-icon"></span>
+  		</button>
+
+  		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      			<li class="nav-item active">
+        			<a class="nav-link m-2 px-5 pl-md-5" href="#">Home</a>
+      			</li>
+    		</ul>
+  		</div>
+	</nav>
+
+	<div class="container-sm border p-3 my-3">
+
+		<h3 for="basic-url" class="form-label mt-3 mb-3">Enter Details</h3>
+
+		<div class="form-group row mt-2">
+    		<label for="colFormLabel" class="col-sm-2 col-form-label">No. of Questions Done</label>
+    		<div class="col-sm-10">
+      			<input type="text" class="form-control" id="questions" placeholder="Rs.">
+    		</div>
+    	</div>
+
+		<div class="form-group row mt-2">
+    		<label for="colFormLabel" class="col-sm-2 col-form-label">Rate Per Question</label>
+    		<div class="col-sm-10">
+      			<input type="text" class="form-control" id="rate" placeholder="Rs.">
+    		</div>
+    	</div>
+
+		<div class="form-group row mt-2">
+    		<label for="colFormLabel" class="col-sm-2 col-form-label">TDS Deduction Percentage</label>
+    		<div class="col-sm-10">
+      			<input type="text" class="form-control" id="tds" placeholder="%">
+    		</div>
+    	</div>
+
+    	<div id="btn-1" class="text-center m-4">
+    		<button class="btn btn-success btn-lg px-5" onclick="calculate()">Calculate</button>
+    	</div>
+
+    	<div id="btn-2" class="text-center m-4" style="display: none">
+    		<button class="btn btn-outline-warning btn-lg px-5" onclick="calculate()">Clear</button>
+    	</div>
+
+    	<div id="result" style="display: none;">
+    		<table class="table table-bordered">
+    			<thead class="table-dark">
+    				<tr>
+      					<th scope="col">No.of Solutions</th>
+      					<th scope="col">Rate Per Solution</th>
+      					<th scope="col">Total</th>
+      					<th scope="col">TDS Deducting %</th>
+      					<th scope="col">TDS Deducting Amount</th>      					
+      					<th scope="col">Net Total</th>
+    				</tr>
+  				</thead>
+  				<tbody class="table-warning">
+    				<tr>
+      					<td id="c1"></td>
+      					<td id="c2"></td>
+      					<td id="c3"></td>
+      					<td id="c4"></td>
+      					<td id="c5"></td>
+      					<td id="c6"></td>
+    				</tr>
+  				</tbody>
+			</table>
+    	</div>
+
+	</div>
+
+
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+	<!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+
+    <script type="text/javascript">
+    	questions = document.getElementById("questions");
+    	rate = document.getElementById("rate");
+    	tds = document.getElementById("tds");
+
+    	function validate() {
+    		if (questions.value=="") {
+    			alert("Give the no.of questions done.");
+    			questions.focus();
+    			return false;
+    		} else if(isNaN(parseInt(questions.value))) {
+    			alert("Enter a valid number as no.of questions done.");
+    			questions.focus();
+    			return false;
+    		} else if (rate.value=="") {
+    			alert("Give the rate per question.");
+    			rate.focus();
+    			return false;
+    		} else if(isNaN(parseInt(rate.value))) {
+    			alert("Enter a valid number as Rate per question.");
+    			rate.focus();
+    			return false;
+    		} else if (tds.value=="") {
+    			alert("Give the TDS percentage.");
+    			tds.focus();
+    			return false;
+    		} else if(isNaN(parseInt(tds.value))) {
+    			alert("Enter a valid number as TDS percentage.");
+    			tds.focus();
+    			return false;
+    		} 
+    		return true;
+    	}
+
+    	function visible() {
+    		var x = document.getElementById("result");
+    		var btn1 = document.getElementById("btn-1");
+    		var btn2 = document.getElementById("btn-2");
+
+    		if (x.style.display === "none") {
+    			x.style.display = "block";
+    			btn1.style.display = "none";
+    			btn2.style.display = "block";
+  			} else {
+    			x.style.display = "none";
+    			btn1.style.display = "block";
+    			btn2.style.display = "none";
+  			}
+    	}
+
+    	function calculate() {
+
+    		if (validate()) {
+    			q = parseInt(questions.value);
+    			r = parseFloat(rate.value);
+    			t = parseFloat(tds.value);
+
+    			document.getElementById("c1").innerHTML = q;
+    			document.getElementById("c2").innerHTML = r;
+    			document.getElementById("c3").innerHTML = q*r;
+    			document.getElementById("c4").innerHTML = t;
+    			document.getElementById("c5").innerHTML = q*r*t/100;
+    			document.getElementById("c6").innerHTML = q*r - q*r*t/100;
+
+    			visible();
+    		}
+  			
+    	}
+
+    </script>
+
+</body>
+</html>
