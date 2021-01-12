@@ -36,21 +36,21 @@
 		<div class="form-group row mt-2">
     		<label for="colFormLabel" class="col-sm-2 col-form-label">No. of Questions Done</label>
     		<div class="col-sm-10">
-      			<input type="text" class="form-control" id="questions" placeholder="Rs.">
+      			<input type="text" class="form-control" id="questions" value="1" placeholder="Rs.">
     		</div>
     	</div>
 
 		<div class="form-group row mt-2">
     		<label for="colFormLabel" class="col-sm-2 col-form-label">Rate Per Question</label>
     		<div class="col-sm-10">
-      			<input type="text" class="form-control" id="rate" placeholder="Rs.">
+      			<input type="text" class="form-control" id="rate" value="189" placeholder="Rs.">
     		</div>
     	</div>
 
 		<div class="form-group row mt-2">
     		<label for="colFormLabel" class="col-sm-2 col-form-label">TDS Deduction Percentage</label>
     		<div class="col-sm-10">
-      			<input type="text" class="form-control" id="tds" placeholder="%">
+      			<input type="text" class="form-control" id="tds" value="7.5" placeholder="%">
     		</div>
     	</div>
 
@@ -59,7 +59,7 @@
     	</div>
 
     	<div id="btn-2" class="text-center m-4" style="display: none">
-    		<button class="btn btn-outline-warning btn-lg px-5" onclick="calculate()">Clear</button>
+    		<button class="btn btn-outline-warning btn-lg px-5" onclick="clear_btn()">Reset</button>
     	</div>
 
     	<div id="result" style="display: none;">
@@ -149,6 +149,13 @@
     			btn2.style.display = "none";
   			}
     	}
+
+      function clear_btn() {
+        questions.value = "1";
+        rate.value = "189";
+        tds.value = "7.5";
+        visible();
+      }
 
     	function calculate() {
 
