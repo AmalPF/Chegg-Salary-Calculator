@@ -18,3 +18,4 @@
 	<li>Amount to be deducted.</li>
 	<li>Net Total.</li>
 </ul>
+<p><a href="https://amalpf.github.io/Chegg-Salary-Calculator.github.io/">Click here</a> to go to the page.</p>
